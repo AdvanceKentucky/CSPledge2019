@@ -268,6 +268,12 @@
  
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <head> <!-- Library to allow editing in Javascript -->
+        <title>A Data Driven Map</title>
+        <script type="text/javascript" src="fusioncharts/fusioncharts.js"></script>
+        <script type="text/javascript" src="fusioncharts/themes/fusioncharts.theme.fusion.js"></script>
+    </head>
+
 
     <!-- Script that generates the actual map of Kentucky with its counties that are highlighted in purple when the mouse hovers over -->
     <div id="chart-container"></div>
@@ -277,20 +283,50 @@
             var chart = new FusionCharts({
                 type: "kentucky",
                 renderAt: "chart-container", // container where chart will render
-                width: "1800",
-                height: "520",
+                width: "1200",
+                height: "620",
                 dataFormat: "json",
                 dataSource: {
                     "chart": {
-                      "showCanvasBorder": "0",
+		      "showCanvasBorder": "0",
                       "caption": "Kentucky Participation in Computer Science Education Week by County",
                       "subcaption": " December 2019 ",
                       "numbersuffix": "%",
                       "includevalueinlabels": "1",
                       "labelsepchar": ": ",
-                      "entityFillHoverColor": "#BB33FF",
+		      "nullEntityColor": "#E633FF",
+        	      "nullEntityAlpha": "50",
+                      "entityFillHoverColor": "#A233FF",
                       "theme": "fusion"
-                    },
+                    }, <!--End chart initialization-->
+ 		    "colorrange": {
+        	        "color": [
+			{
+                	    "minvalue": "0",
+                	    "maxvalue": "100",
+                	    "code": "#E633FF",
+                	    "displayValue": "< 100"
+            		},
+            		{
+                	    "minvalue": "100",
+                	    "maxvalue": "500",
+                	    "code": "#D733FF",
+                	    "displayValue": "100-500"
+            		},
+            		{
+                	    "minvalue": "500",
+                	    "maxvalue": "1000",
+                	    "code": "#C133FF",
+                	    "displayValue": "500-1000"
+            		},
+            		{
+                	    "minvalue": "1000",
+                	    "maxvalue": "10000",
+                	    "code": "#A233FF",
+                	    "displayValue": "> 1000"
+            		}
+        		]
+    		    }, <!--End color gradient-->
               }
             }).render();
         });
