@@ -302,12 +302,12 @@
                 dataSource: {
                     "chart": {
 		      "showCanvasBorder": "0",
-                      "caption": "Kentucky Participation in Computer Science Education Week by County",
-                      "subcaption": " December 2019 ",
+                      "caption": "Kentucky Computer Science Pledges by County",
+                      "subcaption": " 2019-2020 ",
                       "includevalueinlabels": "0",
                       "labelsepchar": ": ",
 		      "formatNumberScale": "0",
-		      "nullEntityColor": "#EE82EE",
+		      "nullEntityColor": "#D7DBDD",
         	    <!--  "nullEntityAlpha": "50", -->
                       "entityFillHoverColor": "#FFC300",
                       "theme": "fusion"
@@ -316,35 +316,40 @@
  		    "colorrange": {
         	      "color": [{
                 	 "minvalue": "0",
-                	 "maxvalue": "100",
-                	 "code": "#EE82EE",
-                	 "displayValue": "< 100"
+                	 "maxvalue": "0",
+                	 "code": "#D7DBDD",
+                	 "displayValue": "No pledges"
             	        },{
+                	  "minvalue": "1",
+                	  "maxvalue": "10",
+                	  "code": "#D7BDE2",
+                	  "displayValue": "1-10"
+            		},{
+                	  "minvalue": "10",
+                	  "maxvalue": "50",
+                	  "code": "#85C1E9",
+                	  "displayValue": "10-50"
+            		},{
+                	  "minvalue": "50",
+                	  "maxvalue": "100",
+                	  "code": "#7DCEA0",
+                	  "displayValue": "50-100"
+            		},{
                 	  "minvalue": "100",
-                	  "maxvalue": "500",
-                	  "code": "#D733FF",
-                	  "displayValue": "100-500"
-            		},{
-                	  "minvalue": "500",
-                	  "maxvalue": "1000",
-                	  "code": "#C133FF",
-                	  "displayValue": "500-1000"
-            		},{
-                	  "minvalue": "1000",
-                	  "maxvalue": "10000",
-                	  "code": "#8A2BE2",
-                	  "displayValue": "> 1000"
+                	  "maxvalue": "1000000000",
+                	  "code": "#0C72F0",
+                	  "displayValue": "> 100"
             		}]
     		    }, <!--End color gradient-->
 
 		    "data":[
 			{
             	        "id": "001",
-            		"value": countAdair
+            		"value": 4
         	    	},
 			{
 			"id": "003",
-			"value": 550
+			"value": 10
 			},
         	    	{
             		"id": "009",
@@ -352,7 +357,7 @@
         		},
         		{
             		"id": "231",
-            		"value": 7000
+            		"value": 52
         		}],
 		},
 		"events": {
