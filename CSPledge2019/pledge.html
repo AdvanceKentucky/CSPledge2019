@@ -7,7 +7,15 @@
     <title>KY CS Pledge</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+	var countAdair=0;
+	var countAllen=0;
+	var countBarren=0;
+	var countWayne=0;
+</script>
+
 </head>
 
 <head> <!-- Fusion libraries added to produce map of Kentucky -->
@@ -73,17 +81,16 @@
                         </div>
                     </div>
                 </div> <!-- end name row -->
-                
-                
+                                
                 <div class="form-group">
                     <label for="county">Select your county / school district</label>
                     <select name="county" id="county" class="form-control">
                         <option value="none">---select one---</option>
-                        <option value="Adair">Adair
+                        <option value="Adair">Adair</option>
                         <option value="Allen">Allen</option>
                         <option value="Anderson">Anderson</option>
                         <option value="Ballard">Ballard</option>
-                        <option value="Barren">BarrenGlasgow/Caverna/</option>
+                        <option value="Barren">Barren/Glasgow/Caverna</option>
                         <option value="Bath">Bath</option>
                         <option value="Bell">Bell/Middlesboro/Pineville</option>
                         <option value="Boone">Boone/Walton-Verona</option>
@@ -203,7 +210,12 @@
                         <option value="none">--------------</option>
                         <option value="Outside KY">Outside KY</option>
                     </select> 
+		<script>
+		if (select.name="Adair") countAdair=countAdair+5;
+		</script>
                 </div><!-- end county -->
+
+		
 
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -278,6 +290,7 @@
     <!-- Script that generates the actual map of Kentucky with its counties that are highlighted in purple when the mouse hovers over -->
     <div id="chart-container"></div>
     <script>
+	
         FusionCharts.ready(function () {
             // chart instance
             var chart = new FusionCharts({
@@ -291,42 +304,80 @@
 		      "showCanvasBorder": "0",
                       "caption": "Kentucky Participation in Computer Science Education Week by County",
                       "subcaption": " December 2019 ",
-                      "numbersuffix": "%",
-                      "includevalueinlabels": "1",
+                      "includevalueinlabels": "0",
                       "labelsepchar": ": ",
-		      "nullEntityColor": "#E633FF",
-        	      "nullEntityAlpha": "50",
-                      "entityFillHoverColor": "#A233FF",
+		      "formatNumberScale": "0",
+		      "nullEntityColor": "#EE82EE",
+        	    <!--  "nullEntityAlpha": "50", -->
+                      "entityFillHoverColor": "#FFC300",
                       "theme": "fusion"
-                    }, <!--End chart initialization-->
+                    }, <!--End chart initialization-->  
+		   
  		    "colorrange": {
-        	        "color": [
-			{
-                	    "minvalue": "0",
-                	    "maxvalue": "100",
-                	    "code": "#E633FF",
-                	    "displayValue": "< 100"
-            		},
-            		{
-                	    "minvalue": "100",
-                	    "maxvalue": "500",
-                	    "code": "#D733FF",
-                	    "displayValue": "100-500"
-            		},
-            		{
-                	    "minvalue": "500",
-                	    "maxvalue": "1000",
-                	    "code": "#C133FF",
-                	    "displayValue": "500-1000"
-            		},
-            		{
-                	    "minvalue": "1000",
-                	    "maxvalue": "10000",
-                	    "code": "#A233FF",
-                	    "displayValue": "> 1000"
-            		}
-        		]
+        	      "color": [{
+                	 "minvalue": "0",
+                	 "maxvalue": "100",
+                	 "code": "#EE82EE",
+                	 "displayValue": "< 100"
+            	        },{
+                	  "minvalue": "100",
+                	  "maxvalue": "500",
+                	  "code": "#D733FF",
+                	  "displayValue": "100-500"
+            		},{
+                	  "minvalue": "500",
+                	  "maxvalue": "1000",
+                	  "code": "#C133FF",
+                	  "displayValue": "500-1000"
+            		},{
+                	  "minvalue": "1000",
+                	  "maxvalue": "10000",
+                	  "code": "#8A2BE2",
+                	  "displayValue": "> 1000"
+            		}]
     		    }, <!--End color gradient-->
+
+		    "data":[
+			{
+            	        "id": "001",
+            		"value": countAdair
+        	    	},
+			{
+			"id": "003",
+			"value": 550
+			},
+        	    	{
+            		"id": "009",
+            		"value": 140
+        		},
+        		{
+            		"id": "231",
+            		"value": 7000
+        		}],
+		},
+		"events": {
+      		  "beforeRender": function(evt, args) {
+        	  var textArea = document.createElement("textarea");
+        	  textArea.setAttribute("id", "message");
+        	  textArea.setAttribute("rows", "4");
+        	  textArea.setAttribute("cols", "75");
+        	  textArea.style.cssText = "margin-left:15px;text-align:center;display:block;";
+        	  textArea.innerHTML = "Hover on respective counties to see the number of pledges";
+        	  args.container.appendChild(textArea);
+      		},
+     		
+		"entityRollover": function(evt, data) {
+        	  document.getElementById('message').value = "" + data.label + "\n" + "# of pledges: " + data.value;
+      		},
+      
+		"entityRollout": function(evt, data) {
+        	  document.getElementById('message').value = "Hover on respective counties to see the number of pledges";
+      		},
+      
+		"entityClick": function(evt, data) {
+        	  alert("You have clicked on " + data.label + ".");
+      		},
+		
               }
             }).render();
         });
